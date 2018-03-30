@@ -42,6 +42,15 @@ public class CacheConfiguration {
             cm.createCache(mu.acn.cacf.mantis.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(mu.acn.cacf.mantis.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(mu.acn.cacf.mantis.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(mu.acn.cacf.mantis.domain.MantisImport.class.getName(), jcacheConfiguration);
+            cm.createCache(mu.acn.cacf.mantis.domain.MantisApprover.class.getName(), jcacheConfiguration);
+            cm.createCache(mu.acn.cacf.mantis.domain.State.class.getName(), jcacheConfiguration);
+            cm.createCache(mu.acn.cacf.mantis.domain.Status.class.getName(), jcacheConfiguration);
+            cm.createCache(mu.acn.cacf.mantis.domain.Mantis.class.getName(), jcacheConfiguration);
+            cm.createCache(mu.acn.cacf.mantis.domain.MantisImportLine.class.getName(), jcacheConfiguration);
+            cm.createCache(mu.acn.cacf.mantis.domain.Project.class.getName(), jcacheConfiguration);
+            cm.createCache(mu.acn.cacf.mantis.domain.Referent.class.getName(), jcacheConfiguration);
+            cm.createCache(mu.acn.cacf.mantis.domain.MantisStatus.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }
