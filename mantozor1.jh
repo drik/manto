@@ -1,0 +1,91 @@
+entity MantisImport {
+	name String 
+    importDate LocalDate
+    file Blob 
+}
+
+entity MantisApprover {
+    fullName String
+}
+
+entity State {
+    name String
+}
+entity Status {
+    name String
+}
+
+entity Mantis {
+	mantisNumber String required
+    submissionDate LocalDate    
+}
+
+entity MantisImportLine {
+	mantisNumber String required
+    validationStatus 		String
+    project					String
+    updateDate				LocalDate
+    category				String
+    gravity					String
+    augeoReference				String
+    technicalReference			String
+    description				String
+    submissionDate				LocalDate
+    desiredCommitmentDate			LocalDate
+    estimatedChargeCACF			Double
+    commitmentDateCDS			LocalDate
+    estimatedChargeCDS			Double
+    estimatedDSTDelivreryDate		LocalDate
+    recipeDate				LocalDate
+    productionDate				LocalDate
+    devStandardsComplianceScore		String
+    devStandardsComplianceScoreComment	String
+    expressedNeedsComplianceScore		String
+    expressedNeedsComplianceScoreComment	String
+    overallDeadlineRespectScore		String
+    overallDeadlineRespectScoreComment	String
+}
+
+entity Project {
+	name String required
+}
+
+entity Referent {
+	name String
+}
+
+entity MantisStatus{
+    changeDate LocalDate
+}
+
+relationship ManyToOne {
+	Mantis{project} to Project
+}
+relationship ManyToOne {
+	MantisImportLine{state} to State
+	MantisImportLine{mantisImport} to MantisImport
+    MantisImportLine{mantis} to Mantis
+}
+relationship ManyToOne {
+	Project{referent} to Referent
+}
+
+relationship ManyToOne {
+	MantisStatus{mantis} to Mantis
+	MantisStatus{status} to Status
+    MantisStatus{user} to User
+    MantisStatus{approver} to MantisApprover
+}
+relationship ManyToOne {
+	MantisImport{user} to User
+}
+
+// Set pagination options
+paginate Project, Referent, Status, State, MantisApprover with infinite-scroll
+paginate MantisStatus with pagination
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except Project, Referent, Status, State, MantisApprover
+filter *
